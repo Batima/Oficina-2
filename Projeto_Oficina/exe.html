@@ -1,0 +1,98 @@
+﻿<html>
+
+<head>
+	
+		<style>
+		
+			body
+			{
+				margin: 0px 0px 0px 0px;
+			}
+		
+		</style>
+		
+	</head>
+
+<body onload = "start();">
+
+<canvas id="myCanvas" width="800" height="600" style="border:1px solid #000000;">
+</canvas>
+
+<script src = "Engenharia/Carregador.js"></script>
+<script src = "Engenharia/Game.js"></script>
+<script src = "Engenharia/Menu.js"></script>
+<script src = "Engenharia/Player.js"></script>
+<script src = "Engenharia/Tiro.js"></script>
+<script src = "Engenharia/Inimigo.js"></script>
+<script src = "Engenharia/Instruct.js"></script>
+<script src = "Engenharia/Credit.js"></script>
+<script src = "Engenharia/GameOver.js"></script>
+<script src = "Engenharia/Nuvem.js"></script>
+<script src = "Engenharia/Sound.js"></script>
+<script src = "Engenharia/SoundManager.js"></script>
+<script src = "Engenharia/Button.js"></script>
+<script src = "Engenharia/Transitor.js"></script>
+<script src = "Engenharia/Difficulty.js"></script>
+<script src = "Engenharia/BatLib.js"></script>
+<script src = "Engenharia/Mouse.js"></script>
+<script src = "Engenharia/AnimationScene.js"></script>
+
+
+
+<script>
+
+var canvas = document.getElementById("myCanvas");
+document.getElementById("myCanvas").style.cursor = "none";
+var ctx = canvas.getContext("2d");
+var AnimationFrames = 49;
+var scene = new AnimationScene("Arte/ANIMACAO_NAVE/Logo (",AnimationFrames);
+var Sound = new SoundManager();
+var masterImage = new Transitor();
+var mouse = new Mouse();
+var SetaOk = true;
+BgOk = true;
+
+function Checker()
+{
+	if(scene.Ended && AnimationFrames == 49)
+	{
+		AnimationFrames = 82;
+		scene = new AnimationScene("Arte/Animation/EnterAnimation (",AnimationFrames);
+	}
+	else if(scene.Ended && AnimationFrames == 82)
+	{
+		changeScene(Menu,true);
+	}
+}
+
+
+input();
+
+var delta;
+
+var loop = function()
+{
+
+	delta = deltaTime();
+	
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
+	Checker();
+	scene.draw();
+	scene.update();
+	Sound.update();
+	mouse.draw();
+	mouse.update();
+	fades();
+	setTimeout(loop, 30);
+}
+
+var start = function()
+{
+	loop();
+}
+
+
+</script>
+
+</body>
+</html>
